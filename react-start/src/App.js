@@ -1,10 +1,9 @@
 import './App.css';
+import Event from './Components/EventPractice';
 
 function App() {
   return (
-    <div>
-      hello, react
-    </div>
+    <Event/>
   );
 }
 

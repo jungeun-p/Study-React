@@ -31,7 +31,7 @@ const EventPractice = () => {
                 onChange={onChangeMessage}
                 onKeyPress={onKeyPress}
             />
-            <button onClick={onClick}>check</button>
+            <button onClick={onClick}>check please</button>
         </div>
     );
 };

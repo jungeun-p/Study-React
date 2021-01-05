@@ -28,7 +28,7 @@ const TodoList = ({todos, onRemove, onToggle}) => {
             rowHeight={57}
             rowRenderer={rowRenderer}
             list={todos}
-            style={{online:'none'}}
+            style={{outline:'none'}}
         />
         // <div class="TodoList">
         //     {todos.map(todo=>(
@@ -38,4 +38,4 @@ const TodoList = ({todos, onRemove, onToggle}) => {
     )
 };
 
-export default TodoList;
+export default React.memo(TodoList);

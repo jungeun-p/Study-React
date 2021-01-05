@@ -4,25 +4,21 @@ import TodoTemplate from "./Components/TodoTemplate";
 import TodoInsert from "./Components/TodoInsert";
 import TodoList from "./Components/TodoList";
 
-const App = () =>{
-  const [todos, setTodos] = useState([
-    {
-      id:1,
-      text: 'to find react basic',
-      checked: true,
-    },
-    {
-      id:2,
-      text: 'to styled component',
-      checked: true,
-    },
-    {
-      id:3,
-      text: 'make a todo-app',
+function createBulkTodos() {
+  const array=[];
+  for (let i=1; i<2500; i++) {
+    array.push({
+      id: i,
+      text:`할 일${i}`,
       checked: false,
-    },
-  ])
-  const nextId = useRef(4);
+    });
+  }
+  return array;
+}
+
+const App = () =>{
+  const [todos, setTodos] = useState(createBulkTodos);
+  const nextId = useRef(2501);
 
   const onInsert = useCallback(
     text => {

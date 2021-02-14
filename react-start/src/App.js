@@ -1,25 +1,40 @@
-import React, {useState} from 'react';
-import './App.css';
-import Event from './Components/EventPractice';
-import Counter from './Components/Counter';
-import Fetch from './Components/Fetch';
-import Info from './Components/Info';
-import Average from './Components/Average';
+import "./App.css";
+
+import React, { useEffect, useState } from "react";
+
+import Average from "./Components/Average";
+import Counter from "./Components/Counter";
+import Event from "./Components/EventPractice";
+import Info from "./Components/Info";
+import useTitle from "./Components/useTitle";
 
 function App() {
-  const [visible, setVisible] = useState(false);
+  const title = useTitle("init title");
   return (
-    <>
-    <button onClick={()=>{
-      setVisible(!visible);
-    }}>
-      {visible ? 'hide' : 'show'}
-    </button>
-    {visible && <Info/>}
-    <Average/>
-    <Fetch/>
-    </>
+    <div className="App">
+      <h1>title changer</h1>
+      <h2>변경된 타이틀은 {title.title}</h2>
+      <input placeholder="input here" onChange={title.onChange} />
+      <button onClick={title.onClick}>Change</button>
+    </div>
   );
 }
+
+// function App() {
+//   // const [visible, setVisible] = useState(false);
+//   return (
+//     <>
+//       <useTitle />
+//       {/* <button onClick={()=>{
+//       setVisible(!visible);
+//     }}>
+//       {visible ? 'hide' : 'show'}
+//     </button>
+//     {visible && <Info/>}
+//     <Average/>
+//     <Fetch/> */}
+//     </>
+//   );
+// }
 
 export default App;

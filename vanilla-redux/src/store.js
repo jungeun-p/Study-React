@@ -30,8 +30,9 @@ const reducer = (state = [], action) => {
 
 const store = createStore(reducer);
 
-// estore를 subscrib
+// store를 subscribe 시키는 것
 // store의 변동사항에 대해서 subscribe
-store.subscribe();
+// react 는 변동 사항에 있어서만 rerendering을 처리한다.\
+// store.subscribe();
 
 export default store;

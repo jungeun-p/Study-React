@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
+import { actionCreators } from "../store";
 import { connect } from "react-redux";
+import ToDo from "../Components/ToDo";
 
-const Home = (toDos) => {
+const Home = ({ toDos, addToDo }) => {
   const [text, setText] = useState("");
   const onChange = (e) => {
     setText(e.target.value);
@@ -13,6 +14,7 @@ const Home = (toDos) => {
     e.preventDefault();
     console.log(text);
     setText("");
+    addToDo(text);
   };
 
   // 홈에서 store로부터 state를 가져올 수 있도록 해야 합니다
@@ -23,7 +25,11 @@ const Home = (toDos) => {
         <input type="text" value={text} onChange={onChange} />
         <button>Add</button>
       </form>
-      <ul>{JSON.stringify(toDos)}</ul>
+      <ul>
+        {toDos.map((toDo) => (
+          <ToDo {...toDo} key={toDo.id} />
+        ))}
+      </ul>
     </div>
   );
 };
@@ -34,6 +40,15 @@ const mapStateToProps = (state) => {
   return { toDos: state };
 };
 
+// store.dispatch
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // function text가 필요하며, dispatch한다
+    // 뭐를? actionCreators에 있는 addToDo를!
+    addToDo: (text) => dispatch(actionCreators.addToDo(text)),
+  };
+};
+
 // getCurrentState를 통해 store로부터 state를 가져올 수 있다!
 // Redux state로부터 home(component)에 prop으로서 전달!
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

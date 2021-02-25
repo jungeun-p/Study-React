@@ -13,7 +13,7 @@ const addToDo = (text) => {
 const deleteToDo = (id) => {
   return {
     type: DELETE,
-    id,
+    id: parseInt(id),
   };
 };
 
@@ -22,7 +22,7 @@ const reducer = (state = [], action) => {
     case ADD:
       return [{ text: action.text, id: Date.now() }, ...state];
     case DELETE:
-      return state.filter((toDo) => toDo !== action.id);
+      return state.filter((toDo) => toDo.id !== action.id);
     default:
       return state;
   }
@@ -34,5 +34,9 @@ const store = createStore(reducer);
 // store의 변동사항에 대해서 subscribe
 // react 는 변동 사항에 있어서만 rerendering을 처리한다.\
 // store.subscribe();
+export const actionCreators = {
+  addToDo,
+  deleteToDo,
+};
 
 export default store;

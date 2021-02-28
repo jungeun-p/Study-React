@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { actionCreators } from "../store";
+import { add } from "../store";
+//import { actionCreators } from "../store";
 import { connect } from "react-redux";
 import ToDo from "../Components/ToDo";
 
@@ -45,7 +46,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // function text가 필요하며, dispatch한다
     // 뭐를? actionCreators에 있는 addToDo를!
-    addToDo: (text) => dispatch(actionCreators.addToDo(text)),
+    addToDo: (text) => dispatch(add(text)),
   };
 };
 

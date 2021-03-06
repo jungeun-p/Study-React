@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   // console.log(ownProps)
   return {
     // state 안에는 text만 존재해.
-    // 하지만 우리는 ownProps에서 id값을 받아올 수 있다!
+    // 하지만 우리는 ownProps에서 id값을  받아올 수 있다!
     onBtnClick: () => dispatch(remove(ownProps.id)),
   };
 };

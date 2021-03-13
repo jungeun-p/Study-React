@@ -16,11 +16,13 @@ function App() {
   // }, [title]);
   return (
     <div className="App">
-      <h1>title changer</h1>
+      <Counter />
+      {/* <h1>title changer</h1>
       <h2>변경된 타이틀은 {title.title}</h2>
       <input placeholder="input here" onChange={title.onChange} />
-      <button onClick={title.onClick}>Change</button>
+      <button onClick={title.onClick}>Change</button> */}
       <Info />
+      <Average />
     </div>
   );
 }

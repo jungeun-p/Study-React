@@ -6,18 +6,16 @@ const useTitle = (init) => {
 
   const onChange = (e) => {
     const { value } = e.target;
-    if (value) {
-      setWord(value);
-    }
+    setWord(value);
   };
 
   const onClick = () => {
-    setTitle(word);
+    setTitle(word + "🦊");
   };
 
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
+  // useEffect(() => {
+  //   document.title = title;
+  // }, [title]);
 
   return { title, onChange, onClick };
 };

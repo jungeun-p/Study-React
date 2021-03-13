@@ -10,12 +10,17 @@ import useTitle from "./Components/useTitle";
 
 function App() {
   const title = useTitle("init title");
+  // useEffect(() => {
+  //   console.log("렌더링 완료!");
+  //   console.log(title);
+  // }, [title]);
   return (
     <div className="App">
       <h1>title changer</h1>
       <h2>변경된 타이틀은 {title.title}</h2>
       <input placeholder="input here" onChange={title.onChange} />
       <button onClick={title.onClick}>Change</button>
+      <Info />
     </div>
   );
 }

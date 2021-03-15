@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer } from "react";
 
 const Counter = () => {
-  //   const [value, setValue] = useState(0);
+  //const [value, setValue] = useState(0);
   const reducer = (state, action) => {
     switch (action.type) {
       case "INCREMENT":
@@ -13,10 +13,12 @@ const Counter = () => {
     }
   };
   const [state, dispatch] = useReducer(reducer, { value: -1 });
+
   const { value } = state;
-  useEffect(() => {
-    console.log(value);
-  }, []);
+
+  // useEffect(() => {
+  //   console.log(value);
+  // }, []);
 
   return (
     <div>

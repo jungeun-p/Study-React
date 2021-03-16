@@ -6,37 +6,33 @@ import React, { useEffect, useState } from "react";
 // import Event from "./Components/EventPractice";
 // import Info from "./Components/Info";
 // import useTitle from "./Components/useTitle";
-import useInput from "./Components/input";
-
-// const useInput = (initialValue, validator) => {
-//   const [value, setValue] = useState(initialValue);
-//   const onChange = (e) => {
-//     // const {
-//     //   target: { value },
-//     // } = e;
-//     const { value } = e.target;
-//     let willUpdate = true;
-//     if (typeof validator === "function") {
-//       willUpdate = validator(value);
-//     }
-//     if (willUpdate) {
-//       setValue(value);
-//     } else {
-//       alert("too long!");
-//     }
-//   };
-//   return { value, onChange };
-// };
-
+// import useInput from "./Components/useInput";
+import useTabs from "./Components/useTabs";
+const tabs = [
+  {
+    title: "section 🐻",
+    content: "I'm the content of the Section 🐻",
+  },
+  {
+    title: "section 🐹",
+    content: "I'm the content of the Section 🐹",
+  },
+  {
+    title: "section 🐨",
+    content: "I'm the content of the Section 🐨",
+  },
+];
 function App() {
   // const title = useTitle("init title");
   // useEffect(() => {
   //   console.log("렌더링 완료!");
   //   console.log(title);
   // }, [title]);
-  const maxLen = (value) => value.length <= 10;
-  const ham = useInput("🐹 : ", maxLen);
-  console.log(ham);
+  // const maxLen = (value) => value.length <= 10;
+  // const ham = useInput("🐹 : ", maxLen);
+  const { currentTab, changeItem } = useTabs(0, tabs);
+  const tabss = useTabs(0, tabs);
+  // same thing tabss.currentTab === currentTab, tabss.changeItem === changeItem
 
   return (
     <div className="App">
@@ -48,7 +44,13 @@ function App() {
       <Info />
       <Average /> */}
       <h2>use Hooks</h2>
-      <input placeholder="Name" {...ham} />
+      {tabs.map((tab, index) => (
+        <button key={index} onClick={() => changeItem(index)}>
+          {tab.title}
+        </button>
+      ))}
+      <div>{currentTab.content}</div>
+      {/* <input placeholder="Name" {...ham} /> */}
     </div>
   );
 }

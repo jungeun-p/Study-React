@@ -1,14 +1,12 @@
-import React from 'react';
-import './TodoTemplate.scss';
+import React from "react";
 
-const TodoTemplate = ({children}) => {
-    return (
-        <div class="TodoTemplate">
-            <div class="app-title">TodoList</div>
-            {/*TodoInsert, TodoList is children*/}
-            <div class="content">{children}</div>
-        </div>
-    );
+const TodoTemplate = ({ children }) => {
+  return (
+    <div className="ToDoTemplate">
+      <div className="app-title">Edit Plan</div>
+      <div className="content">{children}</div>
+    </div>
+  );
 };
 
 export default TodoTemplate;

@@ -14,12 +14,12 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
       <div className={cn("checkbox", { checked })} onClick={() => onToggle(id)}>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
         <div className="text">{text}</div>
-        <div className="remove" onClick={() => onRemove(id)}>
-          <MdRemoveCircleOutline />
-        </div>
+      </div>
+      <div className="remove" onClick={() => onRemove(id)}>
+        <MdRemoveCircleOutline />
       </div>
     </div>
   );
 };
 
-export default TodoListItem;
+export default React.memo(TodoListItem);

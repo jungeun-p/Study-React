@@ -33,19 +33,16 @@ function App() {
 
   const nextId = useRef(2501);
 
-  const onInsert = useCallback(
-    (text) => {
-      const todo = {
-        id: nextId.current,
-        text,
-        checked: false,
-      };
-      dispatch({ type: "INSERT", todo });
-      //setTodos(todos.concat(todo));
-      nextId.current += 1;
-    },
-    [todos]
-  );
+  const onInsert = useCallback((text) => {
+    const todo = {
+      id: nextId.current,
+      text,
+      checked: false,
+    };
+    dispatch({ type: "INSERT", todo });
+    //setTodos(todos.concat(todo));
+    nextId.current += 1;
+  }, []);
 
   const onRemove = useCallback((id) => {
     dispatch({ type: "REMOVE", id });

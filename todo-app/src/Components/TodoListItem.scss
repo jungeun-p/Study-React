@@ -1,12 +1,21 @@
+.TodoListItem-virtualized {
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+  &:nth-child(even) {
+    background-color: #e0e0e0;
+  }
+}
+
 .TodoListItem {
   padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   //번갈아서 색갈 변경
-  &:nth-child(even) {
-    background-color: #e0e0e0;
-  }
+  // &:nth-child(even) {
+  //   background-color: #e0e0e0;
+  // }
   .checkbox {
     cursor: pointer;
     flex: 1; // 차지할 수 있는 영역 모두 차지
@@ -38,7 +47,7 @@
       color: #cbc693;
     }
   }
-  & + & {
-    border-top: 1px solid #dee2e6;
-  }
+  // & + & {
+  //   border-top: 1px solid #dee2e6;
+  // }
 }

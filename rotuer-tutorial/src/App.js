@@ -1,8 +1,9 @@
 import "./App.css";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
 import Profiles from "./Profiles";
+import HistorySample from "./HistorySample";
 function App() {
   return (
     <div>
@@ -16,10 +17,24 @@ function App() {
         <li>
           <Link to="/profiles">Profile</Link>
         </li>
+        <li>
+          <Link to="/history">History example</Link>
+        </li>
       </ul>
-      <Route path="/" component={Home} exact={true} />
-      <Route path={["/about", "/info"]} component={About} />
-      <Route path="/profiles" component={Profiles} />
+      <Switch>
+        <Route path="/" component={Home} exact={true} />
+        <Route path={["/about", "/info"]} component={About} />
+        <Route path="/profiles" component={Profiles} />
+        <Route path="/history" component={HistorySample} />
+        <Route
+          render={({ location }) => (
+            <div>
+              <h2>not found this page:</h2>
+              <p>{location.pathname}</p>
+            </div>
+          )}
+        />
+      </Switch>
     </div>
   );
 }

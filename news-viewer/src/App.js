@@ -1,24 +1,12 @@
 import "./App.css";
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useCallback } from "react";
+import NewsList from "./Components/NewsList";
+import Categories from "./Components/Categories";
+import { Route } from "react-router-dom";
+import NewsPage from "./pages/NewsPage";
+
 function App() {
-  const [data, setData] = useState(null);
-  const onClick = () => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos/1")
-      .then((response) => {
-        const data = JSON.stringify(response.data);
-        setData(data);
-      });
-  };
-  return (
-    <div>
-      <div>
-        <button onClick={onClick}>불러오기</button>
-      </div>
-      {data && <textarea rows={7} value={data} readOnly={true} />}
-    </div>
-  );
+  return <Route path="/:category?" component={NewsPage} />;
 }
 
 export default App;

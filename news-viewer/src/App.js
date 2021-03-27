@@ -1,7 +1,5 @@
 import "./App.css";
-import React, { useState, useCallback } from "react";
-import NewsList from "./Components/NewsList";
-import Categories from "./Components/Categories";
+import React from "react";
 import { Route } from "react-router-dom";
 import NewsPage from "./pages/NewsPage";
 

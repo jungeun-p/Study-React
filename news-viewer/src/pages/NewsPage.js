@@ -4,7 +4,6 @@ import NewsList from "../Components/NewsList";
 
 const NewsPage = ({ match }) => {
   const category = match.params.category || "all";
-
   return (
     <>
       <Categories />

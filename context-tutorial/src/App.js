@@ -1,12 +1,17 @@
 import "./App.css";
 import ColorBox from "./Components/ColorBox";
-import ColorContext from "./Context/color";
+import { ColorProvider } from "./Context/color";
+import React from "react";
+import SelectColor from "./Components/SelectColor";
 
 function App() {
   return (
-    <ColorContext.Provider value={{ color: "beige" }}>
-      <ColorBox />
-    </ColorContext.Provider>
+    <ColorProvider>
+      <div>
+        <SelectColor />
+        <ColorBox />
+      </div>
+    </ColorProvider>
   );
 }
 

@@ -1,7 +1,17 @@
 import "./App.css";
+import Todos from "./components/Todos";
+import CounterContainer from "./containers/CounterContainer";
+import TodosContainer from "./containers/TodosContainer";
 
 function App() {
-  return <div className="App">redux-tutorial</div>;
+  return (
+    <>
+      <h2>redux tutorial</h2>
+      <CounterContainer number={0} />
+      <hr />
+      <TodosContainer />
+    </>
+  );
 }
 
 export default App;

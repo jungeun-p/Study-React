@@ -71,17 +71,13 @@ const initialState = {
 
 const todos = handleActions(
   {
-    [CHANGE_INPUT]: (state, { payload: input }) =>
-      //({ ...state, input }),
-      produce((state, draft) => {
-        draft.input = input;
-      }),
+    [CHANGE_INPUT]: (state, { payload: input }) => ({ ...state, input }),
     [INSERT]: (state, { payload: todo }) =>
       // ({
       //   ...state,
       //   todos: state.todos.concat(todo),
       // }),
-      produce((state, draft) => {
+      produce(state, (draft) => {
         draft.todos.push(todo);
       }),
     [TOGGLE]: (state, { payload: id }) =>
@@ -91,7 +87,7 @@ const todos = handleActions(
       //     todo.id === id ? { ...todo, done: !todo.done } : todo
       //   ),
       // }),
-      produce((state, draft) => {
+      produce(state, (draft) => {
         const todo = draft.todos.find((todo) => todo.id === id);
         todo.done = !todo.done;
       }),
@@ -100,7 +96,7 @@ const todos = handleActions(
       //   ...state,
       //   todos: state.todos.filter((todo) => todo.id !== id),
       // }),
-      produce((state, draft) => {
+      produce(state, (draft) => {
         const index = draft.todos.findIndex((todo) => todo.id === id);
         draft.todos.splice(index, 1);
       }),

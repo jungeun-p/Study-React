@@ -1,6 +1,11 @@
 import { handleActions } from "redux-actions";
 import produce from "immer";
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  createAction,
+  createReducer,
+  createSlice,
+} from "@reduxjs/toolkit";
 
 // const CHANGE_INPUT = "todos/CHANGE_INPUT";
 // const INSERT = "todos/INSERT";
@@ -9,7 +14,7 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 
 // export const changeInput = (input) => ({ type: CHANGE_INPUT, input });
 // export const changeInput = createAction(CHANGE_INPUT, (input) => input);
-export const changeInput = createAction("CHANGE_INPUT");
+// export const changeInput = createAction("CHANGE_INPUT");
 
 let id = 3;
 // 호출시 id는 1씩 더해진다.
@@ -26,15 +31,15 @@ let id = 3;
 //   text,
 //   done: false,
 // }));
-export const insert = createAction("INSERT");
+// export const insert = createAction("INSERT");
 
 // export const toggle = (id) => ({ type: TOGGLE, id });
 // export const toggle = createAction(TOGGLE, (id) => id);
-export const toggle = createAction("TOGGLE");
+// export const toggle = createAction("TOGGLE");
 
 // export const remove = (id) => ({ type: REMOVE, id });
 // export const remove = createAction(REMOVE, (id) => id);
-export const remove = createAction("REMOVE");
+// export const remove = createAction("REMOVE");
 
 const initialState = {
   input: "",
@@ -43,6 +48,51 @@ const initialState = {
     { id: 2, text: "react with redux", done: false },
   ],
 };
+
+const toDos = createSlice({
+  name: "todosReducer",
+  initialState,
+  reducers: {
+    changeInput: (state, action) => ({ ...state, input: action.payload }),
+    insert: (state, action) => {
+      state.todos.push({ id: id++, text: action.payload, done: false });
+    },
+    toggle: (state, action) => {
+      const todo = state.todos.find((todo) => todo.id === action.payload);
+      todo.done = !todo.done;
+    },
+    remove: (state, action) => {
+      const index = state.todos.findIndex((todo) => todo.id === id);
+      state.todos.splice(index, 1);
+    },
+  },
+});
+
+export const store = configureStore({ reducer: toDos.reducer });
+
+console.log(toDos.actions);
+// todos.actions로부터 add, 각각의 타입의 actions를 export 할 수 있다!
+
+export const { changeInput, insert, toggle, remove } = toDos.actions;
+
+// const todos = createReducer(initialState, {
+//   [changeInput]: (state, action) => ({ ...state, input: action.payload }),
+//   //mutate
+//   [insert]: (state, action) => {
+//     state.todos.push({ id: id++, text: action.payload, done: false });
+//   },
+//   [toggle]: (state, action) => {
+//     const todo = state.todos.find((todo) => todo.id === action.payload);
+//     todo.done = !todo.done;
+//   },
+//   // return
+//   [remove]: (state, action) =>
+//     // state.todos.filter((todo) => todo.id !== action.payload),
+//     {
+//       const index = state.todos.findIndex((todo) => todo.id === id);
+//       state.todos.splice(index, 1);
+//     },
+// });
 // function todoss(state = initialState, action) {
 //   switch (action.type) {
 //     case changeInput.type:
@@ -81,25 +131,6 @@ const initialState = {
 //   }
 // }
 
-const todos = createReducer(initialState, {
-  [changeInput]: (state, action) => ({ ...state, input: action.payload }),
-  //mutate
-  [insert]: (state, action) => {
-    state.todos.push({ id: id++, text: action.payload, done: false });
-  },
-  [toggle]: (state, action) => {
-    const todo = state.todos.find((todo) => todo.id === action.payload);
-    todo.done = !todo.done;
-  },
-  // return
-  [remove]: (state, action) =>
-    // state.todos.filter((todo) => todo.id !== action.payload),
-    {
-      const index = state.todos.findIndex((todo) => todo.id === id);
-      state.todos.splice(index, 1);
-    },
-});
-
 // const todos = handleActions(
 //   {
 //     [CHANGE_INPUT]: (state, { payload: input }) => ({ ...state, input }),
@@ -135,4 +166,4 @@ const todos = createReducer(initialState, {
 //   initialState
 // );
 
-export default todos;
+export default toDos;

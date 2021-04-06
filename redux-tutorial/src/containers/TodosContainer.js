@@ -6,9 +6,9 @@ import { useCallback } from "react";
 import useActions from "../lib/useActions";
 
 const TodosContainer = () => {
-  const { input, todos } = useSelector(({ todos }) => ({
-    input: todos.input,
-    todos: todos.todos,
+  const { input, todos } = useSelector(({ store }) => ({
+    input: store.input,
+    todos: store.todos,
   }));
   // const dispatch = useDispatch();
   // const onChangeInput = useCallback((input) => dispatch(changeInput(input)), [

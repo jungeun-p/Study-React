@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import produce from "immer";
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 
 // const CHANGE_INPUT = "todos/CHANGE_INPUT";
 // const INSERT = "todos/INSERT";
@@ -43,45 +43,62 @@ const initialState = {
     { id: 2, text: "react with redux", done: false },
   ],
 };
-console.log(insert(), changeInput());
+// function todoss(state = initialState, action) {
+//   switch (action.type) {
+//     case changeInput.type:
+//       console.log(action);
+//       return {
+//         ...state,
+//         input: action.payload,
+//       };
+//     case insert.type:
+//       // return {
+//       //   ...state,
+//       //   todos: state.todos.concat(action.payload),
+//       // };
+//       return {
+//         ...state,
+//         todos: state.todos.concat({
+//           id: id++,
+//           text: action.payload,
+//           done: false,
+//         }),
+//       };
+//     case toggle.type:
+//       return {
+//         ...state,
+//         todos: state.todos.map((todo) =>
+//           todo.id === action.payload ? { ...todo, done: !todo.done } : todo
+//         ),
+//       };
+//     case remove.type:
+//       return {
+//         ...state,
+//         todos: state.todos.filter((todo) => todo.id !== action.payload),
+//       };
+//     default:
+//       return state;
+//   }
+// }
 
-function todos(state = initialState, action) {
-  switch (action.type) {
-    case changeInput.type:
-      console.log(action);
-      return {
-        ...state,
-        input: action.payload,
-      };
-    case insert.type:
-      // return {
-      //   ...state,
-      //   todos: state.todos.concat(action.payload),
-      // };
-      return {
-        ...state,
-        todos: state.todos.concat({
-          id: id++,
-          text: action.payload,
-          done: false,
-        }),
-      };
-    case toggle.type:
-      return {
-        ...state,
-        todos: state.todos.map((todo) =>
-          todo.id === action.payload ? { ...todo, done: !todo.done } : todo
-        ),
-      };
-    case remove.type:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
-      };
-    default:
-      return state;
-  }
-}
+const todos = createReducer(initialState, {
+  [changeInput]: (state, action) => ({ ...state, input: action.payload }),
+  //mutate
+  [insert]: (state, action) => {
+    state.todos.push({ id: id++, text: action.payload, done: false });
+  },
+  [toggle]: (state, action) => {
+    const todo = state.todos.find((todo) => todo.id === action.payload);
+    todo.done = !todo.done;
+  },
+  // return
+  [remove]: (state, action) =>
+    // state.todos.filter((todo) => todo.id !== action.payload),
+    {
+      const index = state.todos.findIndex((todo) => todo.id === id);
+      state.todos.splice(index, 1);
+    },
+});
 
 // const todos = handleActions(
 //   {

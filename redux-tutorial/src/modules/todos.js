@@ -15,7 +15,7 @@ import {
 // export const changeInput = (input) => ({ type: CHANGE_INPUT, input });
 // export const changeInput = createAction(CHANGE_INPUT, (input) => input);
 // export const changeInput = createAction("CHANGE_INPUT");
-
+//
 let id = 3;
 // 호출시 id는 1씩 더해진다.
 // export const insert = (text) => ({
@@ -68,11 +68,10 @@ const toDos = createSlice({
   },
 });
 
-export const store = configureStore({ reducer: toDos.reducer });
+const todos = toDos.reducer;
 
-console.log(toDos.actions);
+// console.log(todos.actions);
 // todos.actions로부터 add, 각각의 타입의 actions를 export 할 수 있다!
-
 export const { changeInput, insert, toggle, remove } = toDos.actions;
 
 // const todos = createReducer(initialState, {
@@ -93,6 +92,7 @@ export const { changeInput, insert, toggle, remove } = toDos.actions;
 //       state.todos.splice(index, 1);
 //     },
 // });
+
 // function todoss(state = initialState, action) {
 //   switch (action.type) {
 //     case changeInput.type:
@@ -166,4 +166,4 @@ export const { changeInput, insert, toggle, remove } = toDos.actions;
 //   initialState
 // );
 
-export default toDos;
+export default todos;

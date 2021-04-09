@@ -1,8 +1,6 @@
-import React, { useCallback } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import Counter from "../components/Counter";
 import { increaseAsync, decreaseAsync } from "../modules/counter";
-import useActions from "../lib/useActions";
 
 const CounterContainer = ({ number, increaseAsync, decreaseAsync }) => {
   // const number = useSelector((state) => state.counter);

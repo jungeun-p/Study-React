@@ -3,10 +3,11 @@ import { startLoading, finishLoading } from "../lib/loading";
 export default function createRequestThunk(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
-  return (id) => async (dispatch) => {
+  return (params) => async (dispatch) => {
     dispatch({ type });
+    dispatch(startLoading(type));
     try {
-      const res = await request(id);
+      const res = await request(params);
       dispatch({
         type: SUCCESS,
         payload: res.data,

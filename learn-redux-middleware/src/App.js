@@ -8,7 +8,7 @@ function App() {
     <div>
       <h2>react middleware</h2>
       <CounterContainer />
-      {/* <SampleContainer /> */}
+      <SampleContainer />
     </div>
   );
 }

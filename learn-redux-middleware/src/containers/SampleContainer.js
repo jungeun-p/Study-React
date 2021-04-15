@@ -11,7 +11,7 @@ const SampleContainer = ({
   getUsers,
 }) => {
   useEffect(() => {
-    getPost(1);
+    getPost(3);
     getUsers(1);
   }, [getPost, getUsers]);
   return (

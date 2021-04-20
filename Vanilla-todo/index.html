@@ -1,0 +1,50 @@
+<html>
+  <body>
+    <div class="todo">
+      <h3>todo list</h3>
+      <ul class="list"></ul>
+      <input class="desc" type="text" />
+      <button onClick="onAdd()">+</button>
+      <button onClick="onSaveToServer()">server</button>
+    </div>
+    <script>
+      let currentId = 1;
+      const todoList = [];
+      function onAdd() {
+        const descEl = document.querySelector(".todo .desc");
+        const todo = { id: currentId++, desc: descEl.value };
+        todoList.push(todo);
+        const listEl = document.querySelector(".todo .list");
+        const todoEl = makeTodoElement(todo);
+        listEl.appendChild(todoEl);
+      }
+
+      function makeTodoElement(todo) {
+        const todoEl = document.createElement("LI");
+        const spanEl = document.createElement("SPAN");
+        const buttonEl = document.createElement("BUTTON");
+        spanEl.innerHTML = todo.desc;
+        buttonEl.innerHTML = "삭제";
+        buttonEl.dataset.id = todo.id;
+        buttonEl.onclick = onDelete;
+        todoEl.appendChild(spanEl);
+        todoEl.appendChild(buttonEl);
+        return todoEl;
+      }
+
+      function onSaveToServer() {}
+      function onDelete(e) {
+        const id = Number(e.target.dataset.id);
+        // index 찾기
+        const index = todoList.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          todoList.splice(index, 1);
+          const listEl = document.querySelector(".todo .list");
+          // button 은 list의 자식
+          const todoEl = e.target.parentNode;
+          listEl.removeChild(todoEl);
+        }
+      }
+    </script>
+  </body>
+</html>

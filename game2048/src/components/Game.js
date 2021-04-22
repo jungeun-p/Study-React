@@ -1,44 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import times from "lodash/times";
+import { MAX_POS } from "../constant";
+import { getInitialTileList } from "../util/tile";
+import useMoveTile from "../hook/useMoveTile";
+import Tile from "./Tile";
 
-const Game = () => {
+export default function Game() {
+  const [tileList, setTileList] = useState(getInitialTileList);
+  //up down left right
+  useMoveTile({ tileList, setTileList });
   return (
     <div className="game-container">
       <div className="grid-container">
-        <div className="grid-row">
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-        </div>
-        <div className="grid-row">
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-        </div>
-        <div className="grid-row">
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-        </div>
-        <div className="grid-row">
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-          <div className="grid-cell"></div>
-        </div>
+        {times(MAX_POS, (index) => (
+          <div key={index} className="grid-row">
+            {times(MAX_POS, (index1) => (
+              <div key={index1} className="grid-cell"></div>
+            ))}
+          </div>
+        ))}
       </div>
       <div className="tile-container">
-        <div className="tile tile-4 tile-position-2-2 tile-new">
-          <div className="tile-inner">4</div>
-        </div>
-        <div className="tile tile-2 tile-position-2-4 tile-new">
-          <div className="tile-inner">2</div>
-        </div>
+        {tileList.map((item) => (
+          <Tile key={item.id} {...item} />
+        ))}
       </div>
     </div>
   );
-};
-
-export default Game;
+}

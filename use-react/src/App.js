@@ -1,7 +1,12 @@
 import "./App.css";
+import FriendPage from "./Container/FriendPage";
 
 function App() {
-  return <>react</>;
+  return (
+    <>
+      <FriendPage />
+    </>
+  );
 }
 
 export default App;

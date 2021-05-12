@@ -20,7 +20,7 @@ export const actions = {
   setLoading: (isLoading) => ({ type: types.SET_LOADING, isLoading }),
 };
 
-const INITIAL_STATE = { timeline: [], nextPage: 0, isLoading: false };
+const INITIAL_STATE = { timelines: [], nextPage: 0, isLoading: false };
 
 const reducer = createReducer(INITIAL_STATE, {
   [types.ADD]: (state, action) => state.timelines.push(action.timeline),
@@ -39,7 +39,7 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.INCREASE_NEXT_PAGE]: (state, action) => (state.nextPage += 1),
   [types.ADD_LIKE]: (state, action) => {
     const timeline = state.timeline.find(
-      (item) => tiem.id === action.timelineId
+      (item) => item.id === action.timelineId
     );
     if (timeline) {
       timeline.likes += action.value;

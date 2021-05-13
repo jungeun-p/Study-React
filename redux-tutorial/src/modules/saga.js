@@ -6,6 +6,14 @@ export function* fetchData(action) {
   // loading===true, likecount, api, loading===false
   yield put(actions.setLoading(true));
   yield put(actions.addLike(action.timeline.id, 1));
+  // 예외 처리
+  // yield put(actions.setValue('error:', ''));
+  // try{
+  //   yield call(callApiLike);
+  // } catch(e){
+  //   yield put(actions.setValue('error:', e));
+  //   yield put(actions.addLike(action.timeline.id, -1));
+  // }
   yield call(callApiLike);
   yield put(actions.setLoading(false));
 }

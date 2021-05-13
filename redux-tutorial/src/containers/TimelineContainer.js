@@ -8,6 +8,7 @@ const TimelineContainer = () => {
   const dispatch = useDispatch();
   const timelines = useSelector((state) => state.timeline.timelines);
   const isLoading = useSelector((state) => state.timeline.isLoading);
+  const error = useSelector((state) => state.timeline.error);
 
   function onAdd() {
     const timeline = getNextTimeline();
@@ -23,6 +24,7 @@ const TimelineContainer = () => {
       <button onClick={onAdd}>
         <TimelineList timelines={timelines} onLike={onLike} />
         {isLoading && <p>loading...</p>}
+        {error && <p>❗️error❗️</p>}
       </button>
     </div>
   );

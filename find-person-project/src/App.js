@@ -1,7 +1,8 @@
-import "./App.css";
+import React from "react";
+import Search from "./search/container/Search";
 
 function App() {
-  return <div className="App">Find-Person-Project</div>;
+  return <Search />;
 }
 
 export default App;

@@ -4224,6 +4224,11 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
+dev-tools@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/dev-tools/-/dev-tools-0.1.6.tgz#091dfb7567af29e853050e743555e479a2a4ae50"
+  integrity sha1-CR37dWevKehTBQ50NVXkeaKkrlA=
+
 diff-sequences@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-26.6.2.tgz"

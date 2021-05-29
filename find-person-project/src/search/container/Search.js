@@ -5,7 +5,6 @@ import Settings from "../component/Settings";
 import SearchInput from "./SearchInput";
 
 export default function Search() {
-  const keyword = useSelector((state) => state.search.keyword);
   const logout = () => {};
   const options = () => {};
   return (

@@ -1,11 +1,20 @@
-import { AutoComplete, Input } from "antd";
+// @ts-nocheck
+import { AutoComplete, Input, Space, Typography } from "antd";
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { actions } from "../state";
 
 const SearchInput = ({ options }) => {
   const keyword = useSelector((state) => state.search.keyword);
-  const setkeyword = (value) => {};
+  const dispatch = useDispatch();
+  const setkeyword = (value) => {
+    if (value !== keyword) {
+      dispatch(actions.setValue("keyword", value));
+      dispatch(actions.fetchAutoComplete(value));
+    }
+  };
+  const autoCompletes = useSelector((state) => state.search.autoCompletes);
   const gotoUser = (value) => {};
   return (
     <AutoComplete
@@ -13,7 +22,18 @@ const SearchInput = ({ options }) => {
       onChange={setkeyword}
       onSelect={gotoUser}
       style={{ width: "100%" }}
-      options={[]}
+      options={autoCompletes.map((item) => ({
+        value: item.name,
+        lable: (
+          <Space>
+            <Typography.Text strong>{item.name}</Typography.Text>
+            <Typography.Text type="secondary">
+              {item.department}
+            </Typography.Text>
+            <Typography.Text>{item.tag}</Typography.Text>
+          </Space>
+        ),
+      }))}
       autoFocus
     >
       <Input.Search

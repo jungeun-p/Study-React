@@ -8,6 +8,7 @@ const reducer = combineReducers({
   search: searchReducer,
 });
 const sagaMiddleware = createSagaMiddleware();
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(

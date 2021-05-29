@@ -8,7 +8,7 @@ function* fetchAutoComplete({ keyword }) {
     params: { keyword },
   });
   if (isSuccess && data) {
-    yield put(actions.setValue("autoComplete", data));
+    yield put(actions.setValue("autoCompletes", data));
   }
 }
 

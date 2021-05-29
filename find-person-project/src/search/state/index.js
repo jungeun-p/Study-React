@@ -10,7 +10,7 @@ export const Types = {
 };
 
 export const actions = {
-  setValue: createSetValueAction(Types.setValue),
+  setValue: createSetValueAction(Types.SetValue),
   fetchAutoComplete: (keyword) => ({
     type: Types.FetchAutoComplete,
     keyword,
@@ -19,7 +19,7 @@ export const actions = {
 
 const INITIAL_STATE = {
   keyword: "",
-  AutoComplete: [],
+  autoCompletes: [],
 };
 
 const reducer = createReducer(INITIAL_STATE, {

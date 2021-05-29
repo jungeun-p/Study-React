@@ -19,14 +19,14 @@ export function callApi({ method = "get", url, params, data }) {
     params,
     data,
     withCredentials: true,
-  }).then((res) => {
-    const { resultCode, resultMessage } = res.data;
+  }).then((response) => {
+    const { resultCode, resultMessage } = response.data;
     if (resultCode < 0) {
       message.error(resultMessage);
     }
     return {
       isSuccess: resultCode === ResultCode.Success,
-      data: res.data.data,
+      data: response.data.data,
       resultCode,
       resultMessage,
     };

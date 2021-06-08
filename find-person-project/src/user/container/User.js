@@ -1,6 +1,6 @@
-import { Col, PageHeader, Row } from "antd";
+import { Col, Descriptions, PageHeader, Row, Typography } from "antd";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { actions } from "../state";
 
@@ -16,15 +16,36 @@ const User = ({ match }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const name = match.params.name;
+
   useEffect(() => {
-    //   dispatch(actions.fetchUser(name))
+    dispatch(actions.fetchUser(name));
   }, [name]);
+
+  const isFetched = true;
+  //로딩
+  const isFetching = true;
+
   return (
     <Row justify="center">
       <Col xs={20} lg={14}>
         {/*뒤로가기*/}
         <PageHeader onBack={() => {}} title="사용자 정보">
-          {user?.name}
+          {user && (
+            <Descriptions layout="vertical" bordered column={1}>
+              <Descriptions.Item label="이름">
+                <Typography.Text>{user.name}</Typography.Text>
+              </Descriptions.Item>
+              <Descriptions.Item label="소속">
+                <Typography.Text>{user.department}</Typography.Text>
+              </Descriptions.Item>
+              <Descriptions.Item label="태그">{user.tag}</Descriptions.Item>
+              <Descriptions.Item label="수정 내역">수정 내역</Descriptions.Item>
+            </Descriptions>
+          )}
+          {/* 응답이 오기 전에 문구가 보이기 때문에 fetch가 완료된 후까지 처리. */}
+          {!user && isFetched && (
+            <Typography.Text>존재하지 않는 사용자 입니다.</Typography.Text>
+          )}
         </PageHeader>
       </Col>
     </Row>

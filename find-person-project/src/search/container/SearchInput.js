@@ -4,6 +4,8 @@ import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../state";
+import { actions as userActions } from "../../user/state";
+import { useHistory } from "react-router-dom";
 
 const SearchInput = ({ options }) => {
   const keyword = useSelector((state) => state.search.keyword);
@@ -15,12 +17,19 @@ const SearchInput = ({ options }) => {
     }
   };
   const autoCompletes = useSelector((state) => state.search.autoCompletes);
-  const gotoUser = (value) => {};
+  const history = useHistory();
+  const goToUser = (value) => {
+    const user = autoCompletes.find((item) => item.name === value);
+    if (user) {
+      dispatch(userActions.setValue("user", user));
+      history.push(`/user/${user.name}`);
+    }
+  };
   return (
     <AutoComplete
       keyword={keyword}
       onChange={setkeyword}
-      onSelect={gotoUser}
+      onSelect={goToUser}
       style={{ width: "100%" }}
       options={autoCompletes.map((item) => ({
         value: item.name,

@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import History from "../../common/component/History";
 import useFetchInfo from "../../common/hook/useFetchInfo";
+import useNeedLogin from "../../common/hook/useNeedLogin";
 import { actions, Types } from "../state";
 import Department from "./Department";
 import TagList from "./TagList";
@@ -23,6 +24,7 @@ import TagList from "./TagList";
  */
 
 const User = ({ match }) => {
+  useNeedLogin();
   const history = useHistory();
   // @ts-ignore
   const dispatch = useDispatch();

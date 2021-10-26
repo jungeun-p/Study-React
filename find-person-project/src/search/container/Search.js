@@ -3,9 +3,16 @@ import { Row, Col, Typography } from "antd";
 import "antd/dist/antd.css";
 import Settings from "../component/Settings";
 import SearchInput from "./SearchInput";
+import useNeedLogin from "../../common/hook/useNeedLogin";
+import { useDispatch } from "react-redux";
+import { actions as authActions } from "../../auth/state";
 
 export default function Search() {
-  const logout = () => {};
+  useNeedLogin();
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(authActions.fetchLogout());
+  };
   const options = () => {};
   return (
     <>

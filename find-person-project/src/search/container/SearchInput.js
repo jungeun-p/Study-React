@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 const SearchInput = ({ options }) => {
   const keyword = useSelector((state) => state.search.keyword);
   const dispatch = useDispatch();
+  // value와 keyword("")가 다를 경우 dispatch 실행.
   const setkeyword = (value) => {
     if (value !== keyword) {
       dispatch(actions.setValue("keyword", value));
@@ -33,7 +34,7 @@ const SearchInput = ({ options }) => {
       style={{ width: "100%" }}
       options={autoCompletes.map((item) => ({
         value: item.name,
-        lable: (
+        label: (
           <Space>
             <Typography.Text strong>{item.name}</Typography.Text>
             <Typography.Text type="secondary">

@@ -1,8 +1,20 @@
-import { Col, Descriptions, PageHeader, Row, Typography } from "antd";
+import {
+  Col,
+  Descriptions,
+  PageHeader,
+  Row,
+  Space,
+  Spin,
+  Typography,
+} from "antd";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { actions } from "../state";
+import History from "../../common/component/History";
+import useFetchInfo from "../../common/hook/useFetchInfo";
+import { actions, Types } from "../state";
+import Department from "./Department";
+import TagList from "./TagList";
 
 /**
  *
@@ -21,7 +33,8 @@ const User = ({ match }) => {
     dispatch(actions.fetchUser(name));
   }, [name]);
 
-  const isFetched = true;
+  // const isFetched = true;
+  const { isFetched, isSlow } = useFetchInfo(Types.FetchUser);
   //로딩
   const isFetching = true;
 
@@ -29,17 +42,30 @@ const User = ({ match }) => {
     <Row justify="center">
       <Col xs={20} lg={14}>
         {/*뒤로가기*/}
-        <PageHeader onBack={() => {}} title="사용자 정보">
+        <PageHeader
+          onBack={() => {}}
+          title={
+            <Space>
+              사용자 정보
+              {isSlow && <Spin size="small" />}
+            </Space>
+          }
+        >
           {user && (
             <Descriptions layout="vertical" bordered column={1}>
               <Descriptions.Item label="이름">
                 <Typography.Text>{user.name}</Typography.Text>
               </Descriptions.Item>
               <Descriptions.Item label="소속">
-                <Typography.Text>{user.department}</Typography.Text>
+                <Department />
+                {/* <Typography.Text>{user.department}</Typography.Text> */}
               </Descriptions.Item>
-              <Descriptions.Item label="태그">{user.tag}</Descriptions.Item>
-              <Descriptions.Item label="수정 내역">수정 내역</Descriptions.Item>
+              <Descriptions.Item label="태그">
+                <TagList />
+              </Descriptions.Item>
+              <Descriptions.Item label="수정 내역">
+                <History />
+              </Descriptions.Item>
             </Descriptions>
           )}
           {/* 응답이 오기 전에 문구가 보이기 때문에 fetch가 완료된 후까지 처리. */}

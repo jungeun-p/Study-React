@@ -18,6 +18,7 @@ export function callApi({ method = "get", url, params, data }) {
     baseURL: API_HOST,
     params,
     data,
+    // 사용자 인증을 위해 쿠키로 토큰을 저장
     withCredentials: true,
   }).then((response) => {
     const { resultCode, resultMessage } = response.data;
